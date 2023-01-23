@@ -35,7 +35,7 @@ then
         echo "## [TESTING] Keyword was found but no release was created."
     else
         #echo $DATA | http POST $URL | jq .
-        curl -X POST -d $DATA -H 'Authorization: ${GITHUB_TOKEN}' https://api.github.com/repos/${GITHUB_REPOSITORY}/releases
+        curl -X POST -d "$DATA" -H 'Authorization: ${GITHUB_TOKEN}' -H "Accept: application/vnd.github+json" https://api.github.com/repos/ncmuthu/${GITHUB_REPOSITORY}/releases
     fi
 # otherwise
 else

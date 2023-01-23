@@ -20,13 +20,14 @@ jq . < $EVENT_PATH
 if jq '.commits[].message, .head_commit.message' < $EVENT_PATH | grep -i -q "$*";
 then
     # do something
-    VERSION=$(date +%F.%s)
+    VERSION="1.0.0"
 
     DATA="$(printf '{"tag_name":"v%s",' $VERSION)"
-    DATA="${DATA} $(printf '"target_commitish":"master",')"
+    DATA="${DATA} $(printf '"target_commitish":"main",')"
     DATA="${DATA} $(printf '"name":"v%s",' $VERSION)"
     DATA="${DATA} $(printf '"body":"Automated release based on keyword: %s",' "$*")"
     DATA="${DATA} $(printf '"draft":false, "prerelease":false}')"
+    #-d '{"tag_name":"v1.0.0","target_commitish":"master","name":"v1.0.0","body":"Description of the release","draft":false,"prerelease":false,"generate_release_notes":false}'
 
     #URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/releases?access_token=${GITHUB_TOKEN}"
 
